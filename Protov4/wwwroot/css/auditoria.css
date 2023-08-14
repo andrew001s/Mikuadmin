@@ -1,0 +1,31 @@
+﻿@font-face {
+    font-family: 'Spoof';
+    src: url('../recursos/SpoofTrial-Bold.otf') format('opentype');
+}
+
+body {
+}
+
+.title-auditoria {
+    padding: 10px;
+}
+
+    .title-auditoria h1 {
+        font-family: 'Spoof Trial';
+        margin-left: 30px;
+        margin-top: 25px;
+    }
+
+.tabla-pedidos {
+    width: 110%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    text-align: center;
+}
+
+    /* Estilos para la cabecera de la tabla (thead) */
+    .tabla-pedidos thead th {
+        font-family: Arial;
+        color: black;
+        padding: 10px 0;
+    }

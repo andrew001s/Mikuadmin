@@ -3,34 +3,36 @@
     Layout = "~/Views/Administrador/_LayoutAdmin.cshtml";
 }
 @model List<AuditoriaDTO>
-<div>
+<div class="title-auditoria">
     <h1>Auditoria</h1>
 </div>
-
 <div>
-
-    <table>
-        <tr>
-            <th>Id_Auditoria</th>
-            <th>Id_Usuario</th>
-            <th>Fecha_Inicio_Sesiom</th>
-            <th>Fecha_Cierre_Sesion</th>
-
-        </tr>
-
+    <table class="tabla-pedidos">
+        <thead>
+            <tr>
+                <th>Id_Auditoria</th>
+                <th>Id_Usuario</th>
+                <th>Nombres</th>
+                <th>Apellido</th>
+                <th>Correo electrónico</th>
+                <th>Fecha_Inicio_Sesion</th>
+                <th>Fecha_Cierre_Sesion</th>
+            </tr>
+        </thead>
 
         @for (int i = 0; i < Model.Count; i++)
         {
             var carr = Model[i];
-           
+
             <tr>
                 <td> @carr.id_auditoria</td>
                 <td> @carr.id_usuario</td>
+                <td> @carr.nombre_cliente</td>
+                <td> @carr.apellido_cliente</td>
+                <td> @carr.correo_elec</td>
                 <td> @carr.fecha_inicio_sesion</td>
-                
                 <td>@carr.fecha_cierre_session </td>
             </tr>
         }
     </table>
-
 </div>

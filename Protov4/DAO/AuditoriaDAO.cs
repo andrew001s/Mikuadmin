@@ -4,7 +4,7 @@ using System.Data;
 
 namespace Protov4.DAO
 {
-    public class AuditoriaDAO:DbConnection
+    public class AuditoriaDAO : DbConnection
     {
         public AuditoriaDAO(IConfiguration configuration) : base(configuration)
         {
@@ -20,7 +20,7 @@ namespace Protov4.DAO
                 using (var connection = GetSqlConnection())
                 {
                     connection.Open(); // Abrir la conexión a la base de datos
-                    SqlCommand cmd = new SqlCommand("ObtenerAuditoria", connection); // Llamar al procedimiento almacenado "ObtenerDatosPedido"
+                    SqlCommand cmd = new SqlCommand("ObtenerDatosAuditoriaClientesUsuarios", connection); // Llamar al procedimiento almacenado "ObtenerDatosPedido"
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     using (var dr = cmd.ExecuteReader())
@@ -31,13 +31,15 @@ namespace Protov4.DAO
                             {
                                 id_auditoria = (int)dr["id_auditoria"],
                                 id_usuario = (int)dr["id_usuario"],
+                                nombre_cliente = dr["nombre_cliente"].ToString(),
+                                apellido_cliente = dr["apellido_cliente"].ToString(),
+                                correo_elec = dr["correo_elec"].ToString(),
                                 fecha_inicio_sesion = ((DateTime)dr["fecha_inicio_sesion"]),
                                 fecha_cierre_session = ((DateTime)dr["fecha_cierre_sesion"])
-                             
+
                             });
                         }
                     }
-
                 }
                 return Lista;
             }

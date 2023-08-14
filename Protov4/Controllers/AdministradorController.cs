@@ -51,6 +51,9 @@ namespace Protov4.Controllers
             {
                 id_auditoria = p.id_auditoria,
                 id_usuario = p.id_usuario,
+                nombre_cliente = p.nombre_cliente,
+                apellido_cliente = p.apellido_cliente,
+                correo_elec = p.correo_elec,
                 fecha_inicio_sesion = p.fecha_inicio_sesion,
                 fecha_cierre_session = p.fecha_cierre_session
             }).ToList();
