@@ -1,3 +1,71 @@
 ﻿@{
     Layout = "~/Views/Administrador/_LayoutAdmin.cshtml";
 }
+
+<div>
+    <h1>Nuevo Producto</h1>
+    <form id="crearProductoForm" method="post" action="@Url.Action("NuevoProducto", "Administrador")">
+        <label class="Texto1Form" for="imagen">Imagen</label><br>
+        <input class="Boton1Form" type="file" id="imagen" name="imagen" accept="image/*"><br>
+
+        <label class="Texto1Form" for="nombre">Nombre Producto</label><br>
+        <input class="Boton1Form" type="text" id="nombre" name="nombre" required pattern="[A-Za-z0-9ñÑ\s]+"><br>
+        <label class="Texto1Form" for="precio">Precio</label><br>
+        <input class="Boton1Form" type="number" id="precio" name="precio" required pattern="[0-9]+" inputmode="numeric"><br>
+        <label class="Texto1Form" for="marca">Marca</label><br>
+        <input class="Boton1Form" type="text" id="marca" name="marca" required><br>
+        <label class="Texto1Form" for="existencia">Existencias</label><br>
+        <input class="Boton1Form" type="number" id="existencia" name="existencia" required pattern="[0-9]+" inputmode="numeric"><br>
+        <label class="Texto1Form" for="tipo">Tipo</label><br>
+        <input class="Boton1Form" type="text" id="tipo" name="tipo" required><br>
+        <label class="Texto1Form" for="velocidad">Velocidad</label><br>
+        <input class="Boton1Form" type="text" id="velocidad" name="velocidad" required><br>
+         <label class="Texto1Form" for="fabricante">Fabricante</label><br>
+        <input class="Boton1Form" type="text" id="fabricante" name="fabricante" required><br>
+        <label class="Texto1Form" for="modelo">Modelo</label><br>
+        <input class="Boton1Form" type="text" id="modelo" name="modelo" required><br>
+        <label class="Texto1Form" for="Zócalo">Zócalo</label><br>
+        <input class="Boton1Form" type="text" id="Zócalo" name="Zócalo" required><br>
+        <label class="Texto1Form" for="TamañoVRAM">Tamaño Vram</label><br>
+        <input class="Boton1Form" type="text" id="TamañoVRAM" name="TamañoVRAM" required><br>
+        <label class="Texto1Form" for="TecnologiaRAM">Tecnologia RAM</label><br>
+        <input class="Boton1Form" type="text" id="TecnologiaRAM" name="TecnologiaRAM" required><br>
+        <label class="Texto1Form" for="Interfaz">Interfaz</label><br>
+        <input class="Boton1Form" type="text" id="Interfaz" name="Interfaz" required><br>
+        <label class="Texto1Form" for="tamañomemoria">Tamaño Memoria</label><br>
+        <input class="Boton1Form" type="text" id="tamañomemoria" name="tamañomemoria" required><br>
+        <label class="Texto1Form" for="Almacenamiento">Almacenamiento</label><br>
+        <input class="Boton1Form" type="text" id="Almacenamiento" name="Almacenamiento" required><br>
+        <label class="Texto1Form" for="Descripcion">Descripcion</label><br>
+        <input class="Boton1Form" type="text" id="Descripcion" name="Descripcion" required><br>
+        <div>
+            <button class="btn btn-secondary" type="submit" id="crearProductoBtn">Crear Producto</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.getElementById('crearProductoForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Evitar que el formulario se envíe directamente
+
+        var fileInput = document.getElementById('imagen');
+        var file = fileInput.files[0];
+
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            var base64Image = event.target.result;
+
+            // Agregar el valor base64 al formulario
+            var hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'imagenBase64';
+            hiddenInput.value = base64Image;
+            document.getElementById('crearProductoForm').appendChild(hiddenInput);
+
+            // Enviar el formulario después de agregar el valor base64
+            document.getElementById('crearProductoForm').submit();
+        };
+
+        reader.readAsDataURL(file);
+    });
+</script>

@@ -81,26 +81,41 @@ namespace Protov4.DAO
         }
 
         //Inserta un Producto
-        public void InsertarProducto(string nombre,float precio,string Marca, int existencia,string tipo,string fabricante,string modelo,string velocidad,string Zócalo,string TamañoVRAM,string Interfaz,string TecnologiaRAM,string tamañomemoria,string Almacenamiento,string[] Descripcion)
+        public void InsertarProducto(string nombre,string imagenBase64,float precio,string Marca, int existencia,string tipo,string fabricante,string modelo,string velocidad,string Zócalo,string TamañoVRAM,string Interfaz,string TecnologiaRAM,string tamañomemoria,string Almacenamiento,List<string> Descripcion)
         {
-            var especificaciones = new BsonDocument
-            {
-                {"Fabricante", fabricante},
-                {"Modelo",modelo},
-                {"Velocidad", velocidad},
-                {"Zócalo",Zócalo }, {"TamañoVRAM",TamañoVRAM}, {"Interfaz",Interfaz},{"Tecnología",TecnologiaRAM}
-                ,{"Tamañomemoria",tamañomemoria},{"Almacenamiento",Almacenamiento},{"Descripción", new BsonArray(Descripcion)}
-            };
-            var ProductoDTO = new BsonDocument
-            {
-                {"Nombre_Producto",nombre },
-                {"Precio", precio},
-                {"Marca", Marca},
-                {"Existencia",existencia },
-                {"Tipo", tipo},
-                {"Especificaciones", especificaciones }
+            int index=imagenBase64.IndexOf(",")+1;
+            string base64Data = imagenBase64.Substring(index);
+            byte[] imagenBytes = Convert.FromBase64String(base64Data);
 
+            var producto = new ProductoDTO
+            {
+                Nombre_Producto = nombre,
+                Precio = precio,
+                Marca = Marca,
+                Existencia = existencia,
+                Tipo = tipo,
+                Imagen = imagenBytes,
+                Especificaciones =  new EspecificacionesDTO
+                {
+                    Fabricante=fabricante,
+                    Modelo=modelo,
+                    Velocidad=velocidad,
+                    Zócalo=Zócalo,
+                    TamañoVRAM=TamañoVRAM,
+                    Interfaz=Interfaz,
+                    TecnologíaRAM=TecnologiaRAM,
+                    Tamañomemoria=tamañomemoria,
+                    Almacenamiento=Almacenamiento,
+                    Descripción=Descripcion
+                }
             };
+            prod.InsertOne(producto);
+        }
+        public void eliminarProducto(string id)
+        {
+            var objectId = new ObjectId(id);
+            var filter = Builders<ProductoDTO>.Filter.Eq("_id", objectId);
+            prod.DeleteOne(filter);
         }
     }
 }

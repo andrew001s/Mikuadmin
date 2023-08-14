@@ -5,7 +5,7 @@ namespace Protov4.DAO
     public abstract class MikuTechFactory
     {
         //Insertar nuevo Producto 
-        public abstract void InsertarProducto(string nombre, float precio, string Marca, int existencia, string tipo, string fabricante, string modelo, string velocidad, string Zócalo, string TamañoVRAM, string Interfaz, string TecnologiaRAM, string tamañomemoria, string Almacenamiento, string[] Descripcion);
+        public abstract void InsertarProducto(string nombre, string imagen,float precio, string Marca, int existencia, string tipo, string fabricante, string modelo, string velocidad, string Zócalo, string TamañoVRAM, string Interfaz, string TecnologiaRAM, string tamañomemoria, string Almacenamiento, List<string> Descripcion);
 
         // Obtiene una lista de todos los productos basados en un tipo
         public abstract List<ProductoDTO> GetAllProductos(string tipo);
@@ -36,6 +36,7 @@ namespace Protov4.DAO
         public abstract List<PedidoDTO> ObtenerPedidoPorId(int idPedido);
         //Actualiza las existencias de un producto luego de una compra
         public abstract void ActualizarExistencias(string id,int cantidad);
-
+        //Metodo para eliminar un producto de mongo 
+        public abstract void eliminarProducto(string id);
     }
 }
